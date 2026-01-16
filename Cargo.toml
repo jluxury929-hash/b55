@@ -1,0 +1,27 @@
+[workspace]
+members = ["titan", "predator"]
+
+[workspace.package]
+version = "206.11.0"
+edition = "2021"
+
+[workspace.dependencies]
+# Alloy v1.0: The stable, high-performance successor to ethers-rs
+alloy = { version = "1.0", features = ["full", "pubsub", "rpc-types-eth", "signer-keystore"] }
+# REVM: Local state-forking (the gold standard for 2026 simulation)
+revm = { version = "8.0", features = ["std", "serde", "memory_db"] }
+# Performance Primitives
+petgraph = { version = "0.6", features = ["rayon"] }
+rayon = "1.9"
+dashmap = "5.5"
+tokio = { version = "1", features = ["full", "parking_lot"] }
+vader-sentiment = "0.1.0"
+core_affinity = "0.8"
+anyhow = "1.0"
+dotenv = "0.15"
+
+[profile.release]
+opt-level = 3
+lto = "fat" # Extreme link-time optimization
+codegen_units = 1
+panic = "abort"
